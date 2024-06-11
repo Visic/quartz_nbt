@@ -925,8 +925,10 @@ opt_float_from_token!(f64);
 /// of the input where the error occurred as well as metadata about the specific error. See
 /// [`ParserErrorType`](crate::snbt::ParserErrorType) for the different error types.
 pub struct SnbtError {
-    segment: String,
-    error: ParserErrorType,
+    /// The segement where the error occurred
+    pub segment: String,
+    /// The specific type of error
+    pub error: ParserErrorType,
 }
 
 impl SnbtError {
