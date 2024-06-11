@@ -1107,3 +1107,19 @@ pub enum ParserErrorType {
         index: usize,
     },
 }
+
+impl ParserErrorType {
+    /// Get the index of the error if there is one
+    pub fn get_index(&self) -> Option<usize> {
+        match self {
+            ParserErrorType::UnmatchedQuote { index } => Some(*index),
+            ParserErrorType::UnknownEscapeSequence => None,
+            ParserErrorType::InvalidNumber => None,
+            ParserErrorType::UnexpectedToken { index, .. } => Some(*index),
+            ParserErrorType::UnexpectedEOS { .. } => None,
+            ParserErrorType::TrailingComma { index } => Some(*index),
+            ParserErrorType::UnmatchedBrace { index } => Some(*index),
+            ParserErrorType::NonHomogenousList { index } => Some(*index),
+        }
+    }
+}
